@@ -115,6 +115,7 @@ const DateRangePicker = ({
 
   const onCloseButtonHandler = () => {
     if (onCloseButton) {
+      onCloseButton();
       onClose();
     }
   };
