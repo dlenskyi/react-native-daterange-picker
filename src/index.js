@@ -372,7 +372,7 @@ const DateRangePicker = ({
                 <Button
                   buttonStyle={buttonStyle}
                   buttonTextStyle={buttonTextStyle}
-                  onPress={_onClose}
+                  onPress={onClose}
                 >
                   {closeButtonText}
                 </Button>
