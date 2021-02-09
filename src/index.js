@@ -86,17 +86,21 @@ const DateRangePicker = ({
   };
 
   const _onOpen = () => {
-    if (typeof open !== "boolean") onOpen();
+    if (typeof open !== "boolean") {
+      onOpen();
+    }
   };
 
   const _onClose = () => {
-    if (typeof open !== "boolean") onClose();
+    if (typeof open !== "boolean") {
+      onClose();
+    }
   };
 
   const onOpen = () => {
     setIsOpen(true);
     if (datePickerOpened) {
-      datePickerOpened()
+      datePickerOpened();
     }
   };
 
@@ -190,6 +194,26 @@ const DateRangePicker = ({
     });
   };
 
+  const thisYear = () => {
+    setSelecting(false);
+    onChange({
+      date: null,
+      startDate: _moment().startOf("year"),
+      endDate: _moment().endOf("year"),
+      displayedDate: _moment(),
+    });
+  };
+
+  const lastYear = () => {
+    setSelecting(false);
+    onChange({
+      date: null,
+      startDate: _moment().startOf("year").subtract(1, "year"),
+      endDate: _moment().endOf("year").subtract(1, "year"),
+      displayedDate: _moment().endOf("year").subtract(1, "year"),
+    });
+  };
+
   const select = useCallback(
     (day) => {
       let _date = _moment(displayedDate);
@@ -224,8 +248,11 @@ const DateRangePicker = ({
 
   useEffect(() => {
     if (typeof open === "boolean") {
-      if (open && !isOpen) onOpen();
-      else if (!open && isOpen) onClose();
+      if (open && !isOpen) {
+        onOpen();
+      } else if (!open && isOpen) {
+        onClose();
+      }
     }
   }, [open]);
 
@@ -355,7 +382,7 @@ const DateRangePicker = ({
                     resizeMode="contain"
                     style={mergedStyles.monthButtons}
                     source={chevronL}
-                  ></Image>
+                  />
                 )}
               </TouchableOpacity>
               <Text style={mergedStyles.headerText}>
@@ -392,13 +419,15 @@ const DateRangePicker = ({
             )}
             {presetButtons && (
               <View style={mergedStyles.buttonContainer}>
-                <Button
-                  buttonStyle={buttonStyle}
-                  buttonTextStyle={buttonTextStyle}
-                  onPress={today}
-                >
-                  Today
-                </Button>
+                {!range && (
+                  <Button
+                    buttonStyle={buttonStyle}
+                    buttonTextStyle={buttonTextStyle}
+                    onPress={today}
+                  >
+                    Today
+                  </Button>
+                )}
                 {range && (
                   <>
                     <Button
@@ -414,6 +443,20 @@ const DateRangePicker = ({
                       onPress={thisMonth}
                     >
                       This Month
+                    </Button>
+                    <Button
+                      buttonStyle={buttonStyle}
+                      buttonTextStyle={buttonTextStyle}
+                      onPress={thisYear}
+                    >
+                      This Year
+                    </Button>
+                    <Button
+                      buttonStyle={buttonStyle}
+                      buttonTextStyle={buttonTextStyle}
+                      onPress={lastYear}
+                    >
+                      Last Year
                     </Button>
                   </>
                 )}
