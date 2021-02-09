@@ -50,6 +50,7 @@ const DateRangePicker = ({
   closeButton,
   closeButtonText,
   datePickerClosed,
+  datePickerOpened,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [weeks, setWeeks] = useState([]);
@@ -93,6 +94,9 @@ const DateRangePicker = ({
 
   const onOpen = () => {
     setIsOpen(true);
+    if (datePickerOpened) {
+      datePickerOpened()
+    }
   };
 
   const onClose = () => {
