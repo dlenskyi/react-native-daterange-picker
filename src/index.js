@@ -47,6 +47,8 @@ const DateRangePicker = ({
   buttonTextStyle,
   presetButtons,
   open,
+  closeButton,
+  closeButtonText,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [weeks, setWeeks] = useState([]);
@@ -77,10 +79,6 @@ const DateRangePicker = ({
     buttonContainer: {
       ...styles.buttonContainer,
       ...buttonContainerStyle,
-    },
-    monthButtons: {
-      ...styles.monthButtons,
-      ...monthButtonsStyle,
     },
   };
 
@@ -365,6 +363,17 @@ const DateRangePicker = ({
               )}
               {weeks}
             </View>
+            {closeButton && (
+              <View style={mergedStyles.buttonContainer}>
+                <Button
+                  buttonStyle={buttonStyle}
+                  buttonTextStyle={buttonTextStyle}
+                  onPress={_onClose}
+                >
+                  {closeButtonText}
+                </Button>
+              </View>
+            )}
             {presetButtons && (
               <View style={mergedStyles.buttonContainer}>
                 <Button
@@ -431,6 +440,7 @@ DateRangePicker.propTypes = {
   buttonStyle: PropTypes.object,
   buttonContainerStyle: PropTypes.object,
   presetButtons: PropTypes.bool,
+  closeButton: PropTypes.bool,
 };
 
 const styles = StyleSheet.create({
@@ -481,6 +491,8 @@ const styles = StyleSheet.create({
   monthButtons: {
     fontSize: 16,
     color: "black",
+    width: 32,
+    height: 32,
   },
   dayHeaderContainer: {
     flexDirection: "row",
@@ -498,9 +510,5 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginBottom: 10,
-  },
-  monthButtons: {
-    width: 32,
-    height: 32,
   },
 });
