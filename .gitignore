@@ -2,3 +2,5 @@ node_modules/
 yarn.lock
 .npmrc
 .npmrc_github
+.idea
+package-lock.json
