@@ -49,6 +49,7 @@ const DateRangePicker = ({
   open,
   closeButton,
   closeButtonText,
+  datePickerClosed,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [weeks, setWeeks] = useState([]);
@@ -101,6 +102,9 @@ const DateRangePicker = ({
       onChange({
         endDate: startDate,
       });
+    }
+    if (datePickerClosed) {
+      datePickerClosed();
     }
   };
 
@@ -491,8 +495,6 @@ const styles = StyleSheet.create({
   monthButtons: {
     fontSize: 16,
     color: "black",
-    width: 32,
-    height: 32,
   },
   dayHeaderContainer: {
     flexDirection: "row",
@@ -510,5 +512,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginBottom: 10,
+  },
+  monthButtons: {
+    width: 32,
+    height: 32,
   },
 });
