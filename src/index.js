@@ -48,6 +48,7 @@ const DateRangePicker = ({
   presetButtons,
   open,
   closeButton,
+  onCloseButton,
   closeButtonText,
   datePickerClosed,
   datePickerOpened,
@@ -109,6 +110,12 @@ const DateRangePicker = ({
     }
     if (datePickerClosed) {
       datePickerClosed();
+    }
+  };
+
+  const onCloseButtonHandler = () => {
+    if (onCloseButton) {
+      onClose();
     }
   };
 
@@ -376,7 +383,7 @@ const DateRangePicker = ({
                 <Button
                   buttonStyle={buttonStyle}
                   buttonTextStyle={buttonTextStyle}
-                  onPress={onClose}
+                  onPress={onCloseButtonHandler}
                 >
                   {closeButtonText}
                 </Button>
