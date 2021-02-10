@@ -46,6 +46,10 @@ const DateRangePicker = ({
   buttonStyle,
   buttonTextStyle,
   presetButtons,
+  presetButtonTodayText,
+  presetButtonThisMonthText,
+  presetButtonThisYearText,
+  presetButtonLastYearText,
   open,
   closeButton,
   onCloseButton,
@@ -174,22 +178,12 @@ const DateRangePicker = ({
     }
   };
 
-  const thisWeek = () => {
-    setSelecting(false);
-    onChange({
-      date: null,
-      startDate: _moment().startOf("week"),
-      endDate: _moment().endOf("week"),
-      displayedDate: _moment(),
-    });
-  };
-
   const thisMonth = () => {
     setSelecting(false);
     onChange({
       date: null,
       startDate: _moment().startOf("month"),
-      endDate: _moment().endOf("month"),
+      endDate: _moment(),
       displayedDate: _moment(),
     });
   };
@@ -199,7 +193,7 @@ const DateRangePicker = ({
     onChange({
       date: null,
       startDate: _moment().startOf("year"),
-      endDate: _moment().endOf("year"),
+      endDate: _moment(),
       displayedDate: _moment(),
     });
   };
@@ -425,7 +419,7 @@ const DateRangePicker = ({
                     buttonTextStyle={buttonTextStyle}
                     onPress={today}
                   >
-                    Today
+                    {presetButtonTodayText ? presetButtonTodayText : "Today"}
                   </Button>
                 )}
                 {range && (
@@ -433,30 +427,29 @@ const DateRangePicker = ({
                     <Button
                       buttonStyle={buttonStyle}
                       buttonTextStyle={buttonTextStyle}
-                      onPress={thisWeek}
-                    >
-                      This Week
-                    </Button>
-                    <Button
-                      buttonStyle={buttonStyle}
-                      buttonTextStyle={buttonTextStyle}
                       onPress={thisMonth}
                     >
-                      This Month
+                      {presetButtonThisMonthText
+                        ? presetButtonThisMonthText
+                        : "This month"}
                     </Button>
                     <Button
                       buttonStyle={buttonStyle}
                       buttonTextStyle={buttonTextStyle}
                       onPress={thisYear}
                     >
-                      This Year
+                      {presetButtonThisYearText
+                        ? presetButtonThisYearText
+                        : "This year"}
                     </Button>
                     <Button
                       buttonStyle={buttonStyle}
                       buttonTextStyle={buttonTextStyle}
                       onPress={lastYear}
                     >
-                      Last Year
+                      {presetButtonLastYearText
+                        ? presetButtonLastYearText
+                        : "Last year"}
                     </Button>
                   </>
                 )}
