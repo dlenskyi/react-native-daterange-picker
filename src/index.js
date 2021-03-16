@@ -90,15 +90,15 @@ const DateRangePicker = ({
   };
 
   const _onOpen = () => {
-    if (typeof open !== "boolean") {
-      onOpen();
-    }
+    // if (typeof open !== "boolean") {
+    onOpen();
+    // }
   };
 
   const _onClose = () => {
-    if (typeof open !== "boolean") {
-      onClose();
-    }
+    // if (typeof open !== "boolean") {
+    onClose();
+    // }
   };
 
   const onOpen = () => {
@@ -407,7 +407,7 @@ const DateRangePicker = ({
                   buttonTextStyle={buttonTextStyle}
                   onPress={onCloseButtonHandler}
                 >
-                  {closeButtonText}
+                  {closeButtonText ? closeButtonText : "Close"}
                 </Button>
               </View>
             )}
