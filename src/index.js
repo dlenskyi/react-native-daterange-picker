@@ -8,6 +8,7 @@ import {
   TouchableWithoutFeedback,
   View,
   Image,
+  Modal,
 } from "react-native";
 import Button from "./components/Button";
 import Day from "./components/Day";
@@ -360,103 +361,116 @@ const DateRangePicker = ({
 
   return isOpen ? (
     <>
-      <View style={mergedStyles.backdrop}>
-        <TouchableWithoutFeedback
-          style={styles.closeTrigger}
-          onPress={_onClose}
+      <View>
+        <Modal
+          animationType="fade"
+          transparent
+          visible={isOpen}
+          onRequestClose={() => {
+            onClose();
+          }}
         >
-          <View style={styles.closeContainer} />
-        </TouchableWithoutFeedback>
-        <View>
-          <View style={mergedStyles.container}>
-            <View style={styles.header}>
-              <TouchableOpacity onPress={previousMonth}>
-                {monthPrevButton || (
-                  <Image
-                    resizeMode="contain"
-                    style={mergedStyles.monthButtons}
-                    source={chevronL}
-                  />
+          <View style={mergedStyles.backdrop}>
+            <TouchableWithoutFeedback
+              style={styles.closeTrigger}
+              onPress={_onClose}
+            >
+              <View style={styles.closeContainer} />
+            </TouchableWithoutFeedback>
+            <View>
+              <View style={mergedStyles.container}>
+                <View style={styles.header}>
+                  <TouchableOpacity onPress={previousMonth}>
+                    {monthPrevButton || (
+                      <Image
+                        resizeMode="contain"
+                        style={mergedStyles.monthButtons}
+                        source={chevronL}
+                      />
+                    )}
+                  </TouchableOpacity>
+                  <Text style={mergedStyles.headerText}>
+                    {displayedDate.format("MMMM") +
+                      " " +
+                      displayedDate.format("YYYY")}
+                  </Text>
+                  <TouchableOpacity onPress={nextMonth}>
+                    {monthNextButton || (
+                      <Image
+                        resizeMode="contain"
+                        style={mergedStyles.monthButtons}
+                        source={chevronR}
+                      />
+                    )}
+                  </TouchableOpacity>
+                </View>
+                <View style={styles.calendar}>
+                  {dayHeaders && (
+                    <View style={styles.dayHeaderContainer}>{dayHeaders}</View>
+                  )}
+                  {weeks}
+                </View>
+                {closeButton && (
+                  <View style={mergedStyles.buttonContainer}>
+                    <Button
+                      buttonStyle={buttonStyle}
+                      buttonTextStyle={buttonTextStyle}
+                      onPress={onCloseButtonHandler}
+                    >
+                      {closeButtonText ? closeButtonText : "Close"}
+                    </Button>
+                  </View>
                 )}
-              </TouchableOpacity>
-              <Text style={mergedStyles.headerText}>
-                {displayedDate.format("MMMM") +
-                  " " +
-                  displayedDate.format("YYYY")}
-              </Text>
-              <TouchableOpacity onPress={nextMonth}>
-                {monthNextButton || (
-                  <Image
-                    resizeMode="contain"
-                    style={mergedStyles.monthButtons}
-                    source={chevronR}
-                  />
+                {presetButtons && (
+                  <View style={mergedStyles.buttonContainer}>
+                    {!range && (
+                      <Button
+                        buttonStyle={buttonStyle}
+                        buttonTextStyle={buttonTextStyle}
+                        onPress={today}
+                      >
+                        {presetButtonTodayText
+                          ? presetButtonTodayText
+                          : "Today"}
+                      </Button>
+                    )}
+                    {range && (
+                      <>
+                        <Button
+                          buttonStyle={buttonStyle}
+                          buttonTextStyle={buttonTextStyle}
+                          onPress={thisMonth}
+                        >
+                          {presetButtonThisMonthText
+                            ? presetButtonThisMonthText
+                            : "This month"}
+                        </Button>
+                        <Button
+                          buttonStyle={buttonStyle}
+                          buttonTextStyle={buttonTextStyle}
+                          onPress={thisYear}
+                        >
+                          {presetButtonThisYearText
+                            ? presetButtonThisYearText
+                            : "This year"}
+                        </Button>
+                        <Button
+                          buttonStyle={buttonStyle}
+                          buttonTextStyle={buttonTextStyle}
+                          onPress={lastYear}
+                        >
+                          {presetButtonLastYearText
+                            ? presetButtonLastYearText
+                            : "Last year"}
+                        </Button>
+                      </>
+                    )}
+                  </View>
                 )}
-              </TouchableOpacity>
-            </View>
-            <View style={styles.calendar}>
-              {dayHeaders && (
-                <View style={styles.dayHeaderContainer}>{dayHeaders}</View>
-              )}
-              {weeks}
-            </View>
-            {closeButton && (
-              <View style={mergedStyles.buttonContainer}>
-                <Button
-                  buttonStyle={buttonStyle}
-                  buttonTextStyle={buttonTextStyle}
-                  onPress={onCloseButtonHandler}
-                >
-                  {closeButtonText ? closeButtonText : "Close"}
-                </Button>
               </View>
-            )}
-            {presetButtons && (
-              <View style={mergedStyles.buttonContainer}>
-                {!range && (
-                  <Button
-                    buttonStyle={buttonStyle}
-                    buttonTextStyle={buttonTextStyle}
-                    onPress={today}
-                  >
-                    {presetButtonTodayText ? presetButtonTodayText : "Today"}
-                  </Button>
-                )}
-                {range && (
-                  <>
-                    <Button
-                      buttonStyle={buttonStyle}
-                      buttonTextStyle={buttonTextStyle}
-                      onPress={thisMonth}
-                    >
-                      {presetButtonThisMonthText
-                        ? presetButtonThisMonthText
-                        : "This month"}
-                    </Button>
-                    <Button
-                      buttonStyle={buttonStyle}
-                      buttonTextStyle={buttonTextStyle}
-                      onPress={thisYear}
-                    >
-                      {presetButtonThisYearText
-                        ? presetButtonThisYearText
-                        : "This year"}
-                    </Button>
-                    <Button
-                      buttonStyle={buttonStyle}
-                      buttonTextStyle={buttonTextStyle}
-                      onPress={lastYear}
-                    >
-                      {presetButtonLastYearText
-                        ? presetButtonLastYearText
-                        : "Last year"}
-                    </Button>
-                  </>
-                )}
-              </View>
-            )}
+            </View>
           </View>
-        </View>
+        </Modal>
       </View>
       {node}
     </>
