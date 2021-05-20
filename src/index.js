@@ -43,6 +43,7 @@ const DateRangePicker = ({
   monthPrevButton,
   monthNextButton,
   children,
+  adBanner,
   buttonContainerStyle,
   buttonStyle,
   buttonTextStyle,
@@ -467,6 +468,7 @@ const DateRangePicker = ({
                     )}
                   </View>
                 )}
+                {!!adBanner && adBanner}
               </View>
             </View>
           </View>
