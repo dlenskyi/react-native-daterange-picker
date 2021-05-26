@@ -9,6 +9,7 @@ import {
   View,
   Image,
   Modal,
+  ScrollView,
 } from "react-native";
 import Button from "./components/Button";
 import Day from "./components/Day";
@@ -51,6 +52,7 @@ const DateRangePicker = ({
   presetButtonTodayText,
   presetButtonThisMonthText,
   presetButtonThisYearText,
+  presetButtonLastMonthText,
   presetButtonLastYearText,
   open,
   closeButton,
@@ -187,6 +189,16 @@ const DateRangePicker = ({
       startDate: _moment().startOf("month"),
       endDate: _moment(),
       displayedDate: _moment(),
+    });
+  };
+
+  const lastMonth = () => {
+    setSelecting(false);
+    onChange({
+      date: null,
+      startDate: _moment().startOf("month").subtract(1, "month"),
+      endDate: _moment().endOf("month").subtract(1, "month"),
+      displayedDate: _moment().endOf("month").subtract(1, "month"),
     });
   };
 
@@ -423,7 +435,11 @@ const DateRangePicker = ({
                   </View>
                 )}
                 {presetButtons && (
-                  <View style={mergedStyles.buttonContainer}>
+                  <ScrollView
+                    horizontal={true}
+                    showsHorizontalScrollIndicator={false}
+                    contentContainerStyle={mergedStyles.buttonContainer}
+                  >
                     {!range && (
                       <Button
                         buttonStyle={buttonStyle}
@@ -449,6 +465,15 @@ const DateRangePicker = ({
                         <Button
                           buttonStyle={buttonStyle}
                           buttonTextStyle={buttonTextStyle}
+                          onPress={lastMonth}
+                        >
+                          {presetButtonLastMonthText
+                            ? presetButtonLastMonthText
+                            : "Last month"}
+                        </Button>
+                        <Button
+                          buttonStyle={buttonStyle}
+                          buttonTextStyle={buttonTextStyle}
                           onPress={thisYear}
                         >
                           {presetButtonThisYearText
@@ -466,7 +491,7 @@ const DateRangePicker = ({
                         </Button>
                       </>
                     )}
-                  </View>
+                  </ScrollView>
                 )}
                 {!!adBanner && adBanner}
               </View>
