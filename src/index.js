@@ -196,9 +196,9 @@ const DateRangePicker = ({
     setSelecting(false);
     onChange({
       date: null,
-      startDate: _moment().startOf("month").subtract(1, "month"),
-      endDate: _moment().endOf("month").subtract(1, "month"),
-      displayedDate: _moment().endOf("month").subtract(1, "month"),
+      startDate: _moment().subtract(1, "month").startOf("month"),
+      endDate: _moment().subtract(1, "month").endOf("month"),
+      displayedDate: _moment().subtract(1, "month").endOf("month"),
     });
   };
 
@@ -216,9 +216,9 @@ const DateRangePicker = ({
     setSelecting(false);
     onChange({
       date: null,
-      startDate: _moment().startOf("year").subtract(1, "year"),
-      endDate: _moment().endOf("year").subtract(1, "year"),
-      displayedDate: _moment().endOf("year").subtract(1, "year"),
+      startDate: _moment().subtract(1, "year").startOf("year"),
+      endDate: _moment().subtract(1, "year").endOf("year"),
+      displayedDate: _moment().subtract(1, "year").endOf("year"),
     });
   };
 
