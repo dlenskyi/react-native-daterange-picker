@@ -581,10 +581,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: "black",
   },
-  monthButtons: {
-    fontSize: 16,
-    color: "black",
-  },
   dayHeaderContainer: {
     flexDirection: "row",
     flexWrap: "wrap",
@@ -605,5 +601,7 @@ const styles = StyleSheet.create({
   monthButtons: {
     width: 32,
     height: 32,
+    fontSize: 16,
+    color: "black",
   },
 });
