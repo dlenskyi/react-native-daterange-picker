@@ -1,12 +1,12 @@
 {
   "name": "@dlenskyi/react-native-daterange-picker",
-  "version": "1.6.3",
+  "version": "1.6.4",
   "description": "Date range and single date picker for React Native (Supports iOS and Android)",
   "main": "src/index.js",
   "scripts": {},
   "repository": {
     "type": "git",
-    "url": "https://github.com/dlenskyi/react-native-daterange-picker.git"
+    "url": "GitHub - dlenskyi/react-native-daterange-picker: A React Native component for picking date ranges or single dates."
   },
   "keywords": [
     "react-native",
